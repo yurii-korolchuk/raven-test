@@ -7,16 +7,16 @@ import {
   Product,
   CartProduct,
   calculateTotalCartPrice,
-  storage,
   RootState,
+  cartStateStorage,
 } from "@/data";
 
-interface CartState {
+export interface CartState {
   cartProducts: CartProduct[];
   total: number;
 }
 
-const initialState: CartState = storage.get("cart") || {
+const initialState: CartState = cartStateStorage.get() || {
   cartProducts: [],
   total: 0,
 };
@@ -46,7 +46,7 @@ export const cartMiddleware = createListenerMiddleware();
 cartMiddleware.startListening({
   actionCreator: cartSlice.actions.addToCart,
   effect: (_, listenerApi) => {
-    storage.set("cart", (listenerApi.getState() as RootState).cart);
+    cartStateStorage.set((listenerApi.getState() as RootState).cart);
   },
 });
 
