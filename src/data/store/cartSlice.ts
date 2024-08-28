@@ -1,12 +1,22 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product, CartProduct, calculateTotalCartPrice } from "@/data";
+import {
+  createListenerMiddleware,
+  createSlice,
+  PayloadAction,
+} from "@reduxjs/toolkit";
+import {
+  Product,
+  CartProduct,
+  calculateTotalCartPrice,
+  storage,
+  RootState,
+} from "@/data";
 
 interface CartState {
   cartProducts: CartProduct[];
   total: number;
 }
 
-const initialState: CartState = {
+const initialState: CartState = storage.get("cart") || {
   cartProducts: [],
   total: 0,
 };
@@ -28,6 +38,15 @@ export const cartSlice = createSlice({
 
       state.total = calculateTotalCartPrice(state.cartProducts);
     },
+  },
+});
+
+export const cartMiddleware = createListenerMiddleware();
+
+cartMiddleware.startListening({
+  actionCreator: cartSlice.actions.addToCart,
+  effect: (_, listenerApi) => {
+    storage.set("cart", (listenerApi.getState() as RootState).cart);
   },
 });
 
