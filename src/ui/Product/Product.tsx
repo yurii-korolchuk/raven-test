@@ -24,10 +24,8 @@ export const Product = ({
         ${price}
       </p>
     </div>
-    <div className={s.rootOverlay}>
-      <button onClick={onButtonClick} className={s.rootOverlayButton}>
-        Add to cart
-      </button>
-    </div>
+    <button className={s.rootOverlay} onClick={onButtonClick}>
+      <span className={s.rootOverlayText}>Add to cart</span>
+    </button>
   </article>
 );
