@@ -6,11 +6,12 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "types": ["vite/client"],
 
     "baseUrl": ".",
-
     "paths": {
       "@/*": ["src/*"],
+      "@data/*": ["src/data/*"],
       "@ui/*": ["src/ui/*"]
     },
 
