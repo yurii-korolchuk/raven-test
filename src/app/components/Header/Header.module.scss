@@ -1,0 +1,16 @@
+.root {
+  width: 100%;
+  font-size: 1.5rem;
+  border-bottom: 1px solid black;
+
+  &Nav {
+    padding-block: 1rem;
+    padding-inline: 1rem;
+
+    &List {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
