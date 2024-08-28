@@ -1,0 +1,57 @@
+.root {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  box-shadow: 0px 0px 24px -4px rgba(0, 0, 0, 0.75);
+  position: relative;
+  max-inline-size: 900px;
+
+  &Image {
+    max-block-size: 140px;
+  }
+
+  &Content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-grow: 1;
+
+    &Description {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    &Control {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      font-size: 2rem;
+
+      &Button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: inherit;
+        inline-size: 40px;
+        block-size: 40px;
+        background-color: grey;
+        border: none;
+        transition: 0.3s;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  &Remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+  }
+}
