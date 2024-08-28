@@ -1,3 +1,3 @@
 import s from "./Cart.module.scss";
 
-export const Cart = () => <div>Cart</div>;
+export const Cart = () => <section>Cart</section>;

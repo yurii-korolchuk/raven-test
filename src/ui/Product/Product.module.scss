@@ -1,0 +1,49 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-inline-size: 200px;
+  gap: 18px;
+  font-size: 0.8rem;
+
+  &Description {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-inline: 10px;
+    padding-block-end: 10px;
+
+    &Text {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      inline-size: 100%;
+      white-space: nowrap;
+    }
+
+    &Price {
+      text-align: end;
+    }
+  }
+
+  &Overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    inline-size: 100%;
+    block-size: 100%;
+    background-color: rgba(236, 236, 236, 0.7);
+    visibility: hidden;
+
+    &Button {
+      text-transform: uppercase;
+      cursor: pointer;
+      padding-inline: 6px;
+      padding-block: 6px;
+    }
+  }
+
+  &:hover &Overlay {
+    visibility: visible;
+  }
+}

@@ -7,12 +7,12 @@ export const Header = () => (
       <ul className={s.rootNavList}>
         <li>
           <Link className={s.rootNavListLink} to="/">
-            HOME
+            Home
           </Link>
         </li>
         <li>
           <Link className={s.rootNavListLink} to="/cart">
-            CART
+            Cart
           </Link>
         </li>
       </ul>

@@ -4,13 +4,13 @@
   border-bottom: 1px solid black;
 
   &Nav {
-    padding-block: 1rem;
-    padding-inline: 1rem;
+    padding: 20px;
 
     &List {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      text-transform: uppercase;
 
       &Link {
         color: inherit;
