@@ -11,6 +11,11 @@
       justify-content: space-between;
       align-items: center;
       text-transform: uppercase;
+      gap: 20px;
+
+      &Home {
+        flex-grow: 1;
+      }
 
       &Link {
         color: inherit;

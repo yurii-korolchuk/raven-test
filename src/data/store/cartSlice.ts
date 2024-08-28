@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product, CartProduct } from "@/data";
+import { Product, CartProduct, calculateTotalCartPrice } from "@/data";
 
 interface CartState {
   cartProducts: CartProduct[];
+  total: number;
 }
 
 const initialState: CartState = {
   cartProducts: [],
+  total: 0,
 };
 
 export const cartSlice = createSlice({
@@ -23,6 +25,8 @@ export const cartSlice = createSlice({
       } else {
         state.cartProducts[productIndex].quantity += 1;
       }
+
+      state.total = calculateTotalCartPrice(state.cartProducts);
     },
   },
 });
