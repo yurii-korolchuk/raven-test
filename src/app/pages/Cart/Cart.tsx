@@ -36,10 +36,10 @@ export const Cart = () => {
               }
             />
           ))}
+          <p>Total: {total}</p>
         </div>
         <CartForm />
       </div>
-      <p>Total: {total}</p>
     </section>
   );
 };
