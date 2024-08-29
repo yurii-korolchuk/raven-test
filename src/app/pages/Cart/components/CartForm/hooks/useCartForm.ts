@@ -23,6 +23,9 @@ export const useCartForm = () => {
     e.preventDefault();
     userInfoStorage.set(formValues);
 
+    // TODO: create separate collection for orders
+    const JSONToSend = JSON.stringify(formValues);
+
     dispatch(cartActions.clearCart());
     navigate("/");
   };
