@@ -3,6 +3,7 @@ import { Layout } from "./components";
 import { Home, Cart } from "./pages";
 import { store } from "@/data";
 import { Provider } from "react-redux";
+import { ErrorBoundary } from "react-error-boundary";
 
 const router = createBrowserRouter([
   {
@@ -23,9 +24,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <ErrorBoundary fallback={<p>Oops... Something went wrong</p>}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </ErrorBoundary>
   );
 }
 
