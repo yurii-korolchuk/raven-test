@@ -21,7 +21,7 @@ export const Product = ({
     <div className={s.rootDescription}>
       <p className={s.rootDescriptionText}>{name}</p>
       <p className={cx(s.rootDescriptionText, s.rootDescriptionPrice)}>
-        ${price}
+        {price}
       </p>
     </div>
     <button className={s.rootOverlay} onClick={onButtonClick}>

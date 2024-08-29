@@ -1,26 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
-import { cartActions, Product, RootState } from "@/data";
 import { CartProduct } from "@/ui";
+import { useCart } from "./hooks/useCart";
+import { calculateProductPrice } from "@/data";
 
 import s from "./Cart.module.scss";
 
 export const Cart = () => {
-  const cartProducts = useSelector(
-    (state: RootState) => state.cart.cartProducts,
-  );
-  const dispatch = useDispatch();
-
-  const onRemoveClick = (id: string) => {
-    dispatch(cartActions.removeFromCart(id));
-  };
-
-  const onDecreaseClick = (id: string) => {
-    dispatch(cartActions.decreaseQuantity(id));
-  };
-
-  const onIncreaseClick = (product: Product) => {
-    dispatch(cartActions.addToCart(product));
-  };
+  const {
+    cartProducts,
+    rate,
+    selectedCurrency,
+    onRemoveClick,
+    onDecreaseClick,
+    onIncreaseClick,
+  } = useCart();
 
   return (
     <section className={s.root}>
@@ -29,7 +21,7 @@ export const Cart = () => {
           key={id}
           name={name}
           imgUrl={imgUrl}
-          price={String(price_usd)}
+          price={calculateProductPrice(price_usd, rate, selectedCurrency)}
           quantity={quantity}
           onRemoveClick={() => onRemoveClick(id)}
           onDecreaseClick={() => onDecreaseClick(id)}

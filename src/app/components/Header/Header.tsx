@@ -1,18 +1,14 @@
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { calculateTotalCartPrice, RootState } from "@/data";
+import { currencies } from "@/data";
+import { useCurrencySelect } from "./hooks/useCurrencySelect";
+import { useTotalCartPrice } from "./hooks/useTotalCartPrice";
 
 import s from "./Header.module.scss";
-import { useCurrencySelect } from "./hooks/useCurrencySelect";
 
 export const Header = () => {
-  const cartProducts = useSelector(
-    (state: RootState) => state.cart.cartProducts,
-  );
-  const total = calculateTotalCartPrice(cartProducts);
-
-  const { currencies, selectedCurrency, handleChangeCurrency } =
+  const { selectedCurrency, handleChangeCurrency, isLoadingRates } =
     useCurrencySelect();
+  const total = useTotalCartPrice();
 
   return (
     <header className={s.root}>
@@ -23,7 +19,11 @@ export const Header = () => {
               Home
             </Link>
           </li>
-          <select value={selectedCurrency} onChange={handleChangeCurrency}>
+          <select
+            disabled={isLoadingRates}
+            value={selectedCurrency}
+            onChange={handleChangeCurrency}
+          >
             {currencies.map((currency) => (
               <option key={currency} value={currency}>
                 {currency}

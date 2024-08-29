@@ -1,23 +1,32 @@
-import { Currency, selectedCurrencyStorage } from "@/data";
-import { useState } from "react";
-
-const currencies: Currency[] = ["USD", "EUR", "UAH"];
+import {
+  AppDispatch,
+  Currency,
+  currencyActions,
+  fetchCurrencyRates,
+  RootState,
+} from "@/data";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export const useCurrencySelect = () => {
-  const [selectedCurrency, setSelectedCurrency] = useState<Currency>(
-    selectedCurrencyStorage.get() || currencies[0],
+  const { selectedCurrency, isLoadingRates } = useSelector(
+    (state: RootState) => state.currency,
   );
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchCurrencyRates());
+  }, []);
 
   const handleChangeCurrency = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newCurrency: Currency = e.target.value as Currency;
 
-    setSelectedCurrency(newCurrency);
-    selectedCurrencyStorage.set(newCurrency);
+    dispatch(currencyActions.changeCurrency(newCurrency));
   };
 
   return {
-    currencies,
     selectedCurrency,
     handleChangeCurrency,
+    isLoadingRates,
   };
 };

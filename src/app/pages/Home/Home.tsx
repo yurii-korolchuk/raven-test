@@ -1,18 +1,12 @@
 import { Loader, Product } from "@/ui";
 import { useProducts } from "./hooks/useProducts";
-import { useDispatch } from "react-redux";
-import { Product as ProductType } from "@/data";
-import { cartActions } from "@/data";
 
 import s from "./Home.module.scss";
+import { calculateProductPrice } from "@/data";
 
 export const Home = () => {
-  const { products, isLoading } = useProducts();
-  const dispatch = useDispatch();
-
-  const onAddToCart = (product: ProductType) => {
-    dispatch(cartActions.addToCart(product));
-  };
+  const { products, isLoading, rate, selectedCurrency, onAddToCart } =
+    useProducts();
 
   if (isLoading) return <Loader />;
 
@@ -23,7 +17,11 @@ export const Home = () => {
           key={product.id}
           imgUrl={product.imgUrl}
           name={product.name}
-          price={String(product.price_usd)}
+          price={calculateProductPrice(
+            product.price_usd,
+            rate,
+            selectedCurrency,
+          )}
           onButtonClick={() => onAddToCart(product)}
         />
       ))}
