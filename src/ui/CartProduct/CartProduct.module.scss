@@ -9,13 +9,23 @@
 
   &Image {
     max-block-size: 140px;
+
+    @media screen and (max-width: 840px) {
+      max-block-size: 90px;
+    }
   }
 
   &Content {
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    gap: 10px;
     flex-grow: 1;
+
+    @media screen and (max-width: 840px) {
+      padding: 8px;
+      font-size: 0.8rem;
+    }
 
     &Description {
       display: flex;
@@ -28,6 +38,10 @@
       gap: 20px;
       align-items: center;
       font-size: 2rem;
+
+      @media screen and (max-width: 840px) {
+        font-size: 1.4rem;
+      }
 
       &Button {
         display: flex;
@@ -43,6 +57,11 @@
         &:hover {
           transform: scale(1.05);
         }
+
+        @media screen and (max-width: 840px) {
+          inline-size: 20px;
+          block-size: 20px;
+        }
       }
     }
   }
@@ -54,5 +73,9 @@
     background: none;
     border: none;
     font-size: 1.3rem;
+
+    @media screen and (max-width: 840px) {
+      font-size: 1rem;
+    }
   }
 }
