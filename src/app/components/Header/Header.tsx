@@ -1,11 +1,14 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { RootState } from "@/data";
+import { calculateTotalCartPrice, RootState } from "@/data";
 
 import s from "./Header.module.scss";
 
 export const Header = () => {
-  const total = useSelector((state: RootState) => state.cart.total);
+  const cartProducts = useSelector(
+    (state: RootState) => state.cart.cartProducts,
+  );
+  const total = calculateTotalCartPrice(cartProducts);
 
   return (
     <header className={s.root}>

@@ -1,24 +1,17 @@
 import {
   createListenerMiddleware,
   createSlice,
+  isAnyOf,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import {
-  Product,
-  CartProduct,
-  calculateTotalCartPrice,
-  RootState,
-  cartStateStorage,
-} from "@/data";
+import { Product, CartProduct, RootState, cartStateStorage } from "@/data";
 
 export interface CartState {
   cartProducts: CartProduct[];
-  total: number;
 }
 
 const initialState: CartState = cartStateStorage.get() || {
   cartProducts: [],
-  total: 0,
 };
 
 export const cartSlice = createSlice({
@@ -35,8 +28,25 @@ export const cartSlice = createSlice({
       } else {
         state.cartProducts[productIndex].quantity += 1;
       }
+    },
 
-      state.total = calculateTotalCartPrice(state.cartProducts);
+    removeFromCart: (state, action: PayloadAction<string>) => {
+      state.cartProducts = state.cartProducts.filter(
+        (product) => product.id !== action.payload,
+      );
+    },
+
+    decreaseQuantity: (state, action: PayloadAction<string>) => {
+      const productIndex = state.cartProducts.findIndex(
+        (product) => product.id === action.payload,
+      );
+      if (state.cartProducts[productIndex].quantity === 1) {
+        state.cartProducts = state.cartProducts.filter(
+          (product) => product.id !== action.payload,
+        );
+      } else {
+        state.cartProducts[productIndex].quantity -= 1;
+      }
     },
   },
 });
@@ -44,7 +54,11 @@ export const cartSlice = createSlice({
 export const cartMiddleware = createListenerMiddleware();
 
 cartMiddleware.startListening({
-  actionCreator: cartSlice.actions.addToCart,
+  matcher: isAnyOf(
+    cartSlice.actions.addToCart,
+    cartSlice.actions.removeFromCart,
+    cartSlice.actions.decreaseQuantity,
+  ),
   effect: (_, listenerApi) => {
     cartStateStorage.set((listenerApi.getState() as RootState).cart);
   },
