@@ -11,12 +11,8 @@ export const Header = () => {
   );
   const total = calculateTotalCartPrice(cartProducts);
 
-  const {
-    currencies,
-    selectedCurrency,
-    setSelectedCurrency,
-    handleChangeCurrency,
-  } = useCurrencySelect();
+  const { currencies, selectedCurrency, handleChangeCurrency } =
+    useCurrencySelect();
 
   return (
     <header className={s.root}>
@@ -27,13 +23,10 @@ export const Header = () => {
               Home
             </Link>
           </li>
-          <select
-            value={selectedCurrency.value}
-            onChange={handleChangeCurrency}
-          >
+          <select value={selectedCurrency} onChange={handleChangeCurrency}>
             {currencies.map((currency) => (
-              <option key={currency.value} value={currency.value}>
-                {currency.value}
+              <option key={currency} value={currency}>
+                {currency}
               </option>
             ))}
           </select>

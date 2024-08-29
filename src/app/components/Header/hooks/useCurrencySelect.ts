@@ -1,17 +1,7 @@
 import { Currency, selectedCurrencyStorage } from "@/data";
 import { useState } from "react";
 
-const currencies: Currency[] = [
-  {
-    value: "USD",
-  },
-  {
-    value: "EUR",
-  },
-  {
-    value: "UAH",
-  },
-];
+const currencies: Currency[] = ["USD", "EUR", "UAH"];
 
 export const useCurrencySelect = () => {
   const [selectedCurrency, setSelectedCurrency] = useState<Currency>(
@@ -19,7 +9,7 @@ export const useCurrencySelect = () => {
   );
 
   const handleChangeCurrency = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newCurrency: Currency = { value: e.target.value };
+    const newCurrency: Currency = e.target.value as Currency;
 
     setSelectedCurrency(newCurrency);
     selectedCurrencyStorage.set(newCurrency);
@@ -28,7 +18,6 @@ export const useCurrencySelect = () => {
   return {
     currencies,
     selectedCurrency,
-    setSelectedCurrency,
     handleChangeCurrency,
   };
 };

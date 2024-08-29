@@ -1,3 +1,1 @@
-export interface Currency {
-  value: string;
-}
+export type Currency = "USD" | "EUR" | "UAH";
