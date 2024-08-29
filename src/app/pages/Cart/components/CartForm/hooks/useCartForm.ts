@@ -24,6 +24,7 @@ export const useCartForm = () => {
     userInfoStorage.set(formValues);
 
     // TODO: create separate collection for orders
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const JSONToSend = JSON.stringify(formValues);
 
     dispatch(cartActions.clearCart());
