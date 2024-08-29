@@ -1,4 +1,6 @@
 import s from "./CartForm.module.scss";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 export const CartForm = () => {
   return (
@@ -24,13 +26,7 @@ export const CartForm = () => {
         required
         className={s.rootInput}
       />
-      <input
-        type="number"
-        placeholder="phone"
-        name="phone"
-        required
-        className={s.rootInput}
-      />
+      <PhoneInput country={"us"} inputClass={s.rootInput} />
       <button type="submit" className={s.rootSubmit}>
         order
       </button>

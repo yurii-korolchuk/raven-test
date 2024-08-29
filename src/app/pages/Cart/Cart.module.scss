@@ -1,14 +1,16 @@
 .root {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 
   &Container {
     display: flex;
     gap: 20px;
 
     &Products {
-      flex-basis: content;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex-basis: 700px;
     }
   }
 }

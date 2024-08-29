@@ -6,11 +6,12 @@
   block-size: fit-content;
   padding-inline: 20px;
   padding-block: 20px;
-  inline-size: 100%;
-  max-inline-size: 300px;
+  flex-basis: 300px;
 
   &Input {
     padding: 10px;
+    border: 1px solid #cacaca;
+
     &::placeholder {
       text-transform: uppercase;
     }
