@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Product, productsCollectionsRef } from "@/data";
 import { getDocs } from "firebase/firestore";
 
-// First, create the thunk
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
