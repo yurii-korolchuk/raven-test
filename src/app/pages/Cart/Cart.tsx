@@ -18,6 +18,10 @@ export const Cart = () => {
 
   const total = useTotalCartPrice();
 
+  if (!cartProducts.length) {
+    return <p>Cart is empty</p>;
+  }
+
   return (
     <section className={s.root}>
       <div className={s.rootContainer}>

@@ -1,5 +1,7 @@
-import { UserInfo, userInfoStorage } from "@/data";
+import { cartActions, UserInfo, userInfoStorage } from "@/data";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const initialFormValues: UserInfo = userInfoStorage.get() || {
   firstName: "",
@@ -10,6 +12,8 @@ const initialFormValues: UserInfo = userInfoStorage.get() || {
 
 export const useCartForm = () => {
   const [formValues, setFormValues] = useState<UserInfo>(initialFormValues);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleInput = (key: keyof UserInfo, value: string) => {
     setFormValues((state) => ({ ...state, [key]: value }));
@@ -18,6 +22,9 @@ export const useCartForm = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     userInfoStorage.set(formValues);
+
+    dispatch(cartActions.clearCart());
+    navigate("/");
   };
 
   return { formValues, handleInput, handleFormSubmit };

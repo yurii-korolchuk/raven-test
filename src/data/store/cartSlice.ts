@@ -48,6 +48,10 @@ export const cartSlice = createSlice({
         state.cartProducts[productIndex].quantity -= 1;
       }
     },
+
+    clearCart: (state) => {
+      state.cartProducts = [];
+    },
   },
 });
 
@@ -58,6 +62,7 @@ cartMiddleware.startListening({
     cartSlice.actions.addToCart,
     cartSlice.actions.removeFromCart,
     cartSlice.actions.decreaseQuantity,
+    cartSlice.actions.clearCart,
   ),
   effect: (_, listenerApi) => {
     cartStateStorage.set((listenerApi.getState() as RootState).cart);
