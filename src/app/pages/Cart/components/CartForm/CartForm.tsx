@@ -5,7 +5,7 @@ import "react-phone-input-2/lib/style.css";
 import s from "./CartForm.module.scss";
 
 export const CartForm = () => {
-  const { handleInput, handleFormSubmit } = useCartForm();
+  const { formValues, handleInput, handleFormSubmit } = useCartForm();
 
   return (
     <form className={s.root} onSubmit={handleFormSubmit}>
@@ -14,6 +14,7 @@ export const CartForm = () => {
         placeholder="name"
         name="firstName"
         required
+        value={formValues.firstName}
         onChange={(e) => handleInput("firstName", e.target.value)}
         className={s.rootInput}
       />
@@ -22,6 +23,7 @@ export const CartForm = () => {
         placeholder="surname"
         name="lastName"
         required
+        value={formValues.lastName}
         onChange={(e) => handleInput("lastName", e.target.value)}
         className={s.rootInput}
       />
@@ -30,12 +32,14 @@ export const CartForm = () => {
         placeholder="address"
         name="address"
         required
+        value={formValues.address}
         onChange={(e) => handleInput("address", e.target.value)}
         className={s.rootInput}
       />
       <PhoneInput
         inputClass={s.rootInput}
         inputProps={{ name: "phone", required: true }}
+        value={formValues.phone}
         onChange={(phone: string) => handleInput("phone", phone)}
       />
       <button type="submit" className={s.rootSubmit}>

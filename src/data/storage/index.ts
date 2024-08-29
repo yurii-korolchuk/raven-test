@@ -1,5 +1,5 @@
 import { CartState } from "../store/store";
-import { Currency } from "../types";
+import { Currency, UserInfo } from "../types";
 
 export const createStorage = <Value>(key: string) => {
   return {
@@ -19,3 +19,4 @@ export const createStorage = <Value>(key: string) => {
 
 export const cartStateStorage = createStorage<CartState>("cart");
 export const selectedCurrencyStorage = createStorage<Currency>("currency");
+export const userInfoStorage = createStorage<UserInfo>("user");

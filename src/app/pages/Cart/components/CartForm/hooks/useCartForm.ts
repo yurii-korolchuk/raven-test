@@ -1,13 +1,7 @@
+import { UserInfo, userInfoStorage } from "@/data";
 import { useState } from "react";
 
-interface FormValues {
-  firstName: string;
-  lastName: string;
-  address: string;
-  phone: string;
-}
-
-const initialFormValues: FormValues = {
+const initialFormValues: UserInfo = userInfoStorage.get() || {
   firstName: "",
   lastName: "",
   address: "",
@@ -15,15 +9,16 @@ const initialFormValues: FormValues = {
 };
 
 export const useCartForm = () => {
-  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+  const [formValues, setFormValues] = useState<UserInfo>(initialFormValues);
 
-  const handleInput = (key: keyof FormValues, value: string) => {
+  const handleInput = (key: keyof UserInfo, value: string) => {
     setFormValues((state) => ({ ...state, [key]: value }));
   };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    userInfoStorage.set(formValues);
   };
 
-  return { handleInput, handleFormSubmit };
+  return { formValues, handleInput, handleFormSubmit };
 };
