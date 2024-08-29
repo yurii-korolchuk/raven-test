@@ -1,6 +1,7 @@
 import { CartProduct } from "@/ui";
 import { useCart } from "./hooks/useCart";
 import { calculateProductPrice } from "@/data";
+import { useTotalCartPrice } from "@/app/hooks";
 
 import s from "./Cart.module.scss";
 
@@ -13,6 +14,8 @@ export const Cart = () => {
     onDecreaseClick,
     onIncreaseClick,
   } = useCart();
+
+  const total = useTotalCartPrice();
 
   return (
     <section className={s.root}>
@@ -30,6 +33,7 @@ export const Cart = () => {
           }
         />
       ))}
+      <p>Total: {total}</p>
     </section>
   );
 };

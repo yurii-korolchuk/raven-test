@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { currencies } from "@/data";
 import { useCurrencySelect } from "./hooks/useCurrencySelect";
-import { useTotalCartPrice } from "./hooks/useTotalCartPrice";
+import { useTotalCartPrice } from "@/app/hooks";
 
 import s from "./Header.module.scss";
 
